@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AptColorPickerComponent } from './apt-color-picker.component';
 
-
-
 @NgModule({
   declarations: [AptColorPickerComponent],
   imports: [
@@ -11,6 +9,6 @@ import { AptColorPickerComponent } from './apt-color-picker.component';
 })
 export class AptColorPickerModule {
   getTitle(): string{
-    return 'My-lib title'
+    return 'AptColorPicker';
   }
  }
