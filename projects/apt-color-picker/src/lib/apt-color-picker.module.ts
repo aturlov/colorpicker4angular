@@ -9,4 +9,8 @@ import { AptColorPickerComponent } from './apt-color-picker.component';
   ],
   exports: [AptColorPickerComponent]
 })
-export class AptColorPickerModule { }
+export class AptColorPickerModule {
+  getTitle(): string{
+    return 'My-lib title'
+  }
+ }
