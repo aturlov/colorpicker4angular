@@ -12,8 +12,6 @@ export class AppComponent implements OnInit{
     private AptColorPickerModule: AptColorPickerModule
   ){}
   ngOnInit(): void {
-    this.title = this.AptColorPickerModule.getTitle();
-  }
-
-  
+    this.title = `demo application for ${this.AptColorPickerModule.getTitle()} library`;
+  } 
 }
