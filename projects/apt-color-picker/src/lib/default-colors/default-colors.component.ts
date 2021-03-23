@@ -1,20 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'apt-default-colors',
   templateUrl: './default-colors.component.html',
   styleUrls: ['./default-colors.component.scss']
 })
-export class DefaultColorsComponent implements OnInit {
+export class DefaultColorsComponent implements OnChanges {
 
   @Input() palette: string[] = [];
   _rows: string[][] = [];
 
   constructor() { }
-
-  ngOnInit(): void {
-    console.log('Receied palette', this.palette);
-    this.buildRows();
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['palette']) {
+      this.buildRows();
+    }
   }
 
   private buildRows() {
@@ -22,7 +23,7 @@ export class DefaultColorsComponent implements OnInit {
     for (var r = 0; r < l; r++) {
       var row = [];
       for (var g = 0; g < l; g++) {
-          if (g === 3) {
+          if (g === Math.floor(l/2)) {
             this._rows.push(row);
             row = [];
           }
