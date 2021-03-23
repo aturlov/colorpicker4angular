@@ -1,8 +1,11 @@
-<p>component works!</p>
+<p>Temporary component works instead of library!</p>
 
 <div class = "colorpicker">
     <input value={{checkedColor}}
-        class = "colorpicker" >
+        class = "colorpicker" 
+        (click)="onShowTable()"
+        (focusout) = "onShowTable()"
+    ><!--doto show off afrer click anywhere else after click on button-->
     <button 
         class = "colorpicker" 
         (click)="onShowTable()"></button>
@@ -12,7 +15,19 @@
     <div 
         class = "table" 
         [class.visible]="flagVisibleTable"
-        (click)="onCheckColor()">
-        <p>Table will be here soon</p>
+    >
+        <table class="table">
+            <tr *ngFor="let i of numbers">
+                <td *ngFor="let j of numbers">
+                    <!--<p >{{i}}, {{j}}</p> doesn't work-->
+                    <div 
+                        class="cell"
+                        (click)="onCheckColor(i,j)">
+                        <p>{{i}}{{j}}</p>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
     </div>
 </div>

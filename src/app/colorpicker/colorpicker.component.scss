@@ -21,17 +21,38 @@ button.colorpicker{
     margin-left: 5px;
 }
 
-.table.visible {
+div.table.visible {
 
     border:1px;
     width: 200px;
-    height: 160px;
+    height: max-content;
     background-color:steelblue;
     visibility: visible;
     
 }
-.table {
+div.table {
 
     visibility: hidden;
     
+}
+table.table {
+
+    border:1px;
+    width: 200px;
+    height: 160px;
+    
+}
+table, th, td {
+    border: 1px solid black;
+  }
+
+  div.cell{
+      background-color: red;
+      width: 100%;
+      height: 100%
+  }
+
+table.table.hover{
+
+    cursor: crosshair;
 }
