@@ -1,0 +1,19 @@
+<p>component works!</p>
+
+<div class = "colorpicker">
+    <input value={{checkedColor}}
+        class = "colorpicker" 
+        text="Choose color">
+    <button 
+        class = "colorpicker" 
+        (click)="onShowTable()"></button>
+</div>
+
+<div >
+    <div 
+        class = "table" 
+        [class.visible]="flagVisibleTable"
+        (click)="onCheckColor()">
+        <p>Table will be here soon</p>
+    </div>
+</div>

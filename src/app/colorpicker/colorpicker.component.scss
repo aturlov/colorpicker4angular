@@ -1,0 +1,37 @@
+div.colorpicker{
+    border: 1px;
+    border-style: solid;
+    padding: 5px;
+    width: max-content;
+    height: max-content;
+    
+}
+
+input.colorpicker{
+    width: 160px;
+    height: 30px;
+    vertical-align: middle;
+    
+}
+
+button.colorpicker{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.table.visible {
+
+    border:1px;
+    width: 200px;
+    height: 160px;
+    background-color:steelblue;
+    visibility: visible;
+    
+}
+.table {
+
+    visibility: hidden;
+    
+}
