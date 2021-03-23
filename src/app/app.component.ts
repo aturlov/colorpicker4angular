@@ -8,9 +8,12 @@ import {AptColorPickerModule} from 'apt-color-picker'
 })
 export class AppComponent implements OnInit{
   title?:string;
+  p2 = ['EE', 'BB', '55', '22', '88', '11'];
+
   constructor(
     private AptColorPickerModule: AptColorPickerModule
   ){}
+  
   ngOnInit(): void {
     this.title = `demo application for ${this.AptColorPickerModule.getTitle()} library`;
   } 
