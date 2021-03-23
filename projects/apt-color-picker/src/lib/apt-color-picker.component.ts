@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'apt-ColorPicker',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AptColorPickerComponent implements OnInit {
 
+  @Input() palette: string[] = ['00', '99', '33', '66', 'FF', 'CC'];
   constructor() { }
 
   ngOnInit(): void {
