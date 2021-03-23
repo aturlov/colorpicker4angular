@@ -26,7 +26,6 @@ div.table.visible {
     border:1px;
     width: 200px;
     height: max-content;
-    background-color:steelblue;
     visibility: visible;
     
 }
@@ -52,7 +51,33 @@ table, th, td {
       height: 100%
   }
 
-table.table.hover{
+div.table.visible:hover{
 
     cursor: crosshair;
 }
+
+#idff0000{background-color: #ff0000;}
+#idb00000{background-color: #b00000;}
+#id870000{background-color: #870000;}
+#id550000{background-color: #550000;}
+#ide4e400{background-color: #e4e400;}
+#idbaba00{background-color: #baba00;}
+#id878700{background-color: #878700;}
+#id545400{background-color: #545400;}
+#id00ff00{background-color: #00ff00;}
+#id00b000{background-color: #00b000;}
+#id008700{background-color: #008700;}
+#id005500{background-color: #005500;}
+#id00ffff{background-color: #00ffff;}
+#id00b0b0{background-color: #00b0b0;}
+#id008787{background-color: #008787;}
+#id005555{background-color: #005555;}
+#idb0b0ff{background-color: #b0b0ff;}
+#id8484ff{background-color: #8484ff;}
+#id4949ff{background-color: #4949ff;}
+#id0000ff{background-color: #0000ff;}
+#idff00ff{background-color: #ff00ff;}
+#idb000b0{background-color: #b000b0;}
+#id870087{background-color: #870087;}
+#id550055{background-color: #550055;}
+#ide4e4e4{background-color: #e4e4e4;}

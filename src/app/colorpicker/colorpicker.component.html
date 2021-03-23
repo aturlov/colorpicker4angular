@@ -1,10 +1,11 @@
 <p>Temporary component works instead of library!</p>
 
 <div class = "colorpicker">
-    <input value={{checkedColor}}
+    <input value='{{checkedColor}}'
         class = "colorpicker" 
         (click)="onShowTable()"
         (focusout) = "onShowTable()"
+        id = "id{{checkedColor| slice :1}}"
     ><!--doto show off afrer click anywhere else after click on button-->
     <button 
         class = "colorpicker" 
@@ -22,8 +23,10 @@
                     <!--<p >{{i}}, {{j}}</p> doesn't work-->
                     <div 
                         class="cell"
-                        (click)="onCheckColor(i,j)">
-                        <p>{{i}}{{j}}</p>
+                        (click)="onCheckColor(colorset[5*i+j+1])"
+                        id = "id{{colorset[5*i+j+1]}}"
+                        >
+                        <!--<p>{{i}},{{j}}={{5*i+j+1}}</p>-->
                     </div>
                 </td>
             </tr>
