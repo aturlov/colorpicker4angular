@@ -24,8 +24,8 @@ export class ColorpickerComponent implements OnInit {
     
   }
 
-
   onCheckColor(color:string):void{
+    console.log("checked color: ",color);
     this.flagVisibleTable = !(this.flagVisibleTable);
     this.checkedColor = `#${color}`;
     

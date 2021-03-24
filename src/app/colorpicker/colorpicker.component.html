@@ -4,9 +4,10 @@
     <input value='{{checkedColor}}'
         class = "colorpicker" 
         (click)="onShowTable()"
-        (focusout) = "onShowTable()"
+        
         id = "id{{checkedColor| slice :1}}"
     ><!--doto show off afrer click anywhere else after click on button-->
+    <!--(focusout) = "onShowTable()"-->
     <button 
         class = "colorpicker" 
         (click)="onShowTable()"></button>
@@ -15,22 +16,17 @@
 <div >
     <div 
         class = "table" 
-        [class.visible]="flagVisibleTable"
-    >
+        [class.visible]="flagVisibleTable">
         <table class="table">
             <tr *ngFor="let i of numbers">
                 <td *ngFor="let j of numbers">
-                    <!--<p >{{i}}, {{j}}</p> doesn't work-->
                     <div 
                         class="cell"
                         (click)="onCheckColor(colorset[5*i+j+1])"
-                        id = "id{{colorset[5*i+j+1]}}"
-                        >
-                        <!--<p>{{i}},{{j}}={{5*i+j+1}}</p>-->
+                        id = "id{{colorset[5*i+j+1]}}">
                     </div>
                 </td>
             </tr>
-
         </table>
     </div>
 </div>
