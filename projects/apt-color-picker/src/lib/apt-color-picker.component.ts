@@ -8,9 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AptColorPickerComponent implements OnInit {
 
   @Input() palette: string[] = ['00', '99', '33', '66', 'FF', 'CC'];
+  checkedColor: string = "";
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getColor(color:string): void{
+    this.checkedColor = color;
+    console.log("Checked color: ", this.checkedColor);
   }
 
 }
