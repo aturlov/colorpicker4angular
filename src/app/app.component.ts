@@ -12,8 +12,9 @@ export class AppComponent implements OnInit{
   p2 = ['EE', 'BB', '55', '22'];
   p3 = ['00', '22', '44', '66', '88', 'AA', 'CC','EE'];
 
-  selectedColor: string = "";
-  selectedColor3: string = "";
+  color1: string = "";
+  color2: string = "";
+  color3: string = "";
 
   private _colorPicker3: AptColorPickerComponent | null = null;
 
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit{
   } 
 
   onSelectedColorChange(event: ColorChangeEvent): void {
-    this.selectedColor = event.color;
+    this.color1 = event.color;
   }
 
   onColorButtonClick(event: any): void {
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit{
   }
 
   onSelectedColorChange3(event: ColorChangeEvent): void {
-    this.selectedColor3 = event.color;
+    this.color3 = event.color;
     this._colorPicker3 = event.target;
   }
 

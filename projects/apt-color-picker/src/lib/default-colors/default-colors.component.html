@@ -1,5 +1,5 @@
 <div class="apt_colorPicker_default"><table><tbody>
     <tr *ngFor="let row of _rows">
-        <td *ngFor="let color of row"><div title="#{{color}}" style="background-color: #{{color}};" (click)="clickOnColor(color)">&nbsp;</div></td>
+        <td *ngFor="let color of row"><div title="#{{color}}" style="background-color: #{{color}};" (click)="_clickOnColor(color)">&nbsp;</div></td>
     </tr>
 </tbody></table></div>
