@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ColorChangeEvent } from './color-change-event';
 
 @Component({
   selector: 'apt-ColorPicker',
@@ -11,7 +12,7 @@ export class AptColorPickerComponent implements OnInit {
   
   @Input() palette: string[] = ['00', '99', '33', '66', 'FF', 'CC'];
 
-  @Output() selectedColorChange = new EventEmitter<string>();
+  @Output() readonly selectedColorChange = new EventEmitter<ColorChangeEvent>();
 
   @Output() get selectedColor() { 
       return this._selectedColor; 
@@ -21,10 +22,10 @@ export class AptColorPickerComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  onColorSelect(color:string): void {
+  
+  _onColorSelect(color:string): void {
     this._selectedColor = color;
-    this.selectedColorChange.emit(color);    
+    this.selectedColorChange.emit(new ColorChangeEvent(color, this));    
   }
 
 }

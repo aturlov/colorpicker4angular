@@ -5,3 +5,4 @@
 export * from './lib/apt-color-picker.service';
 export * from './lib/apt-color-picker.component';
 export * from './lib/apt-color-picker.module';
+export * from './lib/color-change-event'
