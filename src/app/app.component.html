@@ -1,9 +1,15 @@
 <div>
   <div>Welcome to {{title}}</div>
   <hr/>
-  <apt-ColorPicker></apt-ColorPicker>
+  <div style="color:#{{selectedColor}}">
+    {{selectedColor}}
+  </div>
+  <apt-ColorPicker (selectedColorChange)="onSelectedColorChange($event)"></apt-ColorPicker>
   <hr/>
   <apt-ColorPicker [palette]="p2"></apt-ColorPicker>
   <hr/>
-  <apt-ColorPicker [palette]="p3"></apt-ColorPicker>
+  <div >
+    <button (click)="onColorButtonClick($event)">Click to see color</button>
+  </div>
+  <apt-ColorPicker [palette]="p3" (selectedColorChange)="onSelectedColorChange3($event)"></apt-ColorPicker>
 </div>

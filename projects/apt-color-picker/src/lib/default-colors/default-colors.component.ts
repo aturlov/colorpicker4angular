@@ -9,7 +9,7 @@ export class DefaultColorsComponent implements OnChanges {
 
   @Input() palette: string[] = [];
   _rows: string[][] = [];
-  @Output() checkColorEvent = new EventEmitter<string>();
+  @Output() colorSelect = new EventEmitter<string>();
 
   constructor() { }
   
@@ -37,7 +37,7 @@ export class DefaultColorsComponent implements OnChanges {
   }
 
   clickOnColor(color: string):void{
-    this.checkColorEvent.emit(color);
+    this.colorSelect.emit(color);
   }
 
 }
