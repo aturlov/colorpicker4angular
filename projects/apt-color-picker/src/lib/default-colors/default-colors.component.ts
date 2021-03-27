@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'apt-default-colors',
@@ -9,6 +9,7 @@ export class DefaultColorsComponent implements OnChanges {
 
   @Input() palette: string[] = [];
   _rows: string[][] = [];
+  @Output() colorSelect = new EventEmitter<string>();
 
   constructor() { }
   
@@ -34,4 +35,9 @@ export class DefaultColorsComponent implements OnChanges {
       this._rows.push(row);
     }    
   }
+
+  clickOnColor(color: string):void{
+    this.colorSelect.emit(color);
+  }
+
 }
