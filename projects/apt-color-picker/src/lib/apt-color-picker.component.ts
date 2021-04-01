@@ -5,7 +5,7 @@ import { ColorChangeEvent } from './color-change-event';
 export interface AptColorPicker {
   palette: string[];
   selectedColorChange: EventEmitter<ColorChangeEvent>;
-  selectedColor:string;
+  readonly selectedColor:string;
 }
 
 @Component({
