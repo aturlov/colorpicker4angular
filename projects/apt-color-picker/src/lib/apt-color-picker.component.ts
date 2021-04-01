@@ -12,7 +12,7 @@ export class AptColorPickerComponent implements OnInit {
   
   @Input() palette: string[] = ['00', '99', '33', '66', 'FF', 'CC'];
 
-  @Output() readonly selectedColorChange = new EventEmitter<ColorChangeEvent>();
+  @Output() readonly selectedColorChange: EventEmitter<ColorChangeEvent> = new EventEmitter<ColorChangeEvent>();
 
   @Output() get selectedColor() { 
       return this._selectedColor; 

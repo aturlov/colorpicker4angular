@@ -36,7 +36,7 @@ export class DefaultColorsComponent implements OnChanges {
     }    
   }
 
-  clickOnColor(color: string):void{
+  _clickOnColor(color: string):void{
     this.colorSelect.emit(color);
   }
 
