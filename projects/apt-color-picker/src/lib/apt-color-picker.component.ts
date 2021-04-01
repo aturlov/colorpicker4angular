@@ -25,7 +25,7 @@ export class AptColorPickerComponent implements OnInit {
   
   _onColorSelect(color:string): void {
     this._selectedColor = color;
-    this.selectedColorChange.emit(new ColorChangeEvent(color, this));    
+    this.selectedColorChange.emit({color: color, target: this});    
   }
 
 }
