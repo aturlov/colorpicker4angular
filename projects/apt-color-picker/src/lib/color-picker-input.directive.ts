@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AptColorPickerComponent } from './apt-color-picker.component';
+import { AptColorPicker } from './apt-color-picker.component';
 import { ColorChangeEvent } from './color-change-event';
 
 @Directive({
@@ -12,9 +12,11 @@ export class ColorPickerInputDirective implements OnDestroy {
 
   private _colorChangeSubscription: Subscription = Subscription.EMPTY;
 
+  private _colorPicker: AptColorPicker | null = null;
+
   constructor(private _inputRef: ElementRef<HTMLInputElement>) { }
 
-  @Input() set aptColorPicker(colorPicker: AptColorPickerComponent) {
+  @Input() set aptColorPicker(colorPicker: AptColorPicker) {
     if (colorPicker) {
       this._colorPicker = colorPicker;
       this._colorChangeSubscription = this._colorPicker.selectedColorChange.subscribe((e: ColorChangeEvent) => {
@@ -26,8 +28,6 @@ export class ColorPickerInputDirective implements OnDestroy {
   ngOnDestroy(): void {
     this._colorChangeSubscription.unsubscribe();
   }
-
-  _colorPicker: AptColorPickerComponent | null = null;
 
   _onColorChange(color: string) {
     this._inputRef.nativeElement.value = color;

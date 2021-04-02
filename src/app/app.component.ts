@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AptColorPickerComponent, AptColorPickerModule, ColorChangeEvent} from 'apt-color-picker'
+import {AptColorPicker, AptColorPickerModule, ColorChangeEvent} from 'apt-color-picker'
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   color2: string = "";
   color3: string = "";
 
-  private _colorPicker3: AptColorPickerComponent | null = null;
+  private _colorPicker3: AptColorPicker | null = null;
 
   constructor(
     private AptColorPickerModule: AptColorPickerModule
