@@ -1,7 +1,6 @@
 import { Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AptColorPicker } from './apt-color-picker.component';
-import { ColorChangeEvent } from './color-change-event';
+import { AptColorPicker, ColorChangeEvent } from './apt-color-picker.component';
 
 @Directive({
   selector: 'input[aptColorPicker]',

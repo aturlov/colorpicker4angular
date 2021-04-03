@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ColorChangeEvent } from './color-change-event';
 
-// TODO: refactor the rest of the code to use this interface instead of AptColorPickerComponent
+export interface ColorChangeEvent {
+  color: string;
+  target: AptColorPicker;
+}
+
 export interface AptColorPicker {
   palette: string[];
   selectedColorChange: EventEmitter<ColorChangeEvent>;
