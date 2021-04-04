@@ -1,19 +1,25 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'apt-default-colors',
   templateUrl: './default-colors.component.html',
   styleUrls: ['./default-colors.component.scss']
 })
-export class DefaultColorsComponent implements OnChanges {
+export class DefaultColorsComponent implements OnInit, OnChanges {
 
   @Input() palette: string[] = [];
   _rows: string[][] = [];
   @Output() colorSelect = new EventEmitter<string>();
 
   constructor() { }
+  
+  ngOnInit(): void {
+    this.buildRows();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // TODO why does not work?
+    console.log('Colors ngOnChanges');
     if (changes.palette) {
       this.buildRows();
     }

@@ -3,11 +3,14 @@
   <div>Welcome to {{title}}</div>
   <hr/>
 
-  <input [aptColorPicker]="colorPicker1">&nbsp;<span style="color:#{{color1}}">{{color1}}</span>
-  <apt-ColorPicker (selectedColorChange)="onSelectedColorChange($event)" #colorPicker1></apt-ColorPicker>
+  <div style="margin-left: 200px;">
+    <input [aptColorPicker]="colorPicker1">&nbsp;<span style="color:#{{color1}}">{{color1}}</span>
+    <button (click)="colorPicker1.opened ? colorPicker1.close() : colorPicker1.open();$event.stopPropagation()">{{colorPicker1.opened ? "close" : "open"}}</button>
+    <apt-color-picker (selectedColorChange)="onSelectedColorChange($event)" #colorPicker1></apt-color-picker>
+  </div>
   <hr/>
 
-  <apt-ColorPicker [palette]="p2" (selectedColorChange)="color2=$event.color"></apt-ColorPicker>
+  <apt-color-picker [palette]="p2" (selectedColorChange)="color2=$event.color" [opened]="true"></apt-color-picker>
   <span style="color:#{{color2}}">{{color2}}</span>
   <hr/>
 
@@ -15,5 +18,5 @@
     <button (click)="onColorButtonClick($event)">Click to see color</button>
   </div>
 
-  <apt-ColorPicker [palette]="p3" (selectedColorChange)="onSelectedColorChange3($event)"></apt-ColorPicker>
+  <apt-color-picker [palette]="p3" (selectedColorChange)="onSelectedColorChange3($event)" [opened]="true"></apt-color-picker>
 </div>
