@@ -12,32 +12,31 @@ export class DefaultColorsComponent implements OnChanges {
   @Output() colorSelect = new EventEmitter<string>();
 
   constructor() { }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['palette']) {
+    if (changes.palette) {
       this.buildRows();
     }
   }
 
-  private buildRows() {
+  private buildRows(): void {
     const l = this.palette.length;
-    for (var r = 0; r < l; r++) {
-      var row = [];
-      for (var g = 0; g < l; g++) {
-          if (g === Math.floor(l/2)) {
+    for (let r = 0; r < l; r++) {
+      let row = [];
+      for (let g = 0; g < l; g++) {
+          if (g === Math.floor(l / 2)) {
             this._rows.push(row);
             row = [];
           }
-          for (var b = 0; b < l; b++) {
+          for (let b = 0; b < l; b++) {
               row.push(this.palette[r] + this.palette[g] + this.palette[b]);
           }
       }
       this._rows.push(row);
-    }    
+    }
   }
 
-  _clickOnColor(color: string):void{
+  _clickOnColor(color: string): void {
     this.colorSelect.emit(color);
   }
-
 }

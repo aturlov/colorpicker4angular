@@ -1,19 +1,22 @@
 .apt_colorPicker_default {
+    display: inline-block;
     background-color: #fff;
     overflow: hidden;
+    border-top: 1px solid #646464;
+    border-left: 1px solid #646464;
 }
 
-.apt_colorPicker_default table {
-    border: 1px solid #646464;
-    border-spacing: 1px;
+.apt_colorPicker_default_row {
+    display: block;
+    line-height: 10px;
+    border-bottom: 1px solid #646464;
+    padding: 0px;
 }
 
-.apt_colorPicker_default table td {
-	padding: 0;
-}
-
-.apt_colorPicker_default table td div {
+.apt_colorPicker_default_cell {
+    display: inline-block;
     cursor: crosshair;
-    height: 11px;
     width: 10px;
+    height: 10px;
+    border-right: 1px solid #646464;
 }
