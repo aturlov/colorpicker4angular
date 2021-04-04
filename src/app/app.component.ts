@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AptColorPicker, AptColorPickerModule, ColorChangeEvent} from 'apt-color-picker'
+import { AptColorPickerModule, ColorChangeEvent, AptColorPickerControl } from 'apt-color-picker';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +16,14 @@ export class AppComponent implements OnInit{
   color2: string = "";
   color3: string = "";
 
-  private _colorPicker3: AptColorPicker | null = null;
+  private _colorPicker3: AptColorPickerControl<ColorChangeEvent> | null = null;
 
   constructor(
-    private AptColorPickerModule: AptColorPickerModule
+    private aptColorPickerModule: AptColorPickerModule
   ){ }
   
   ngOnInit(): void {
-    this.title = `demo application for ${this.AptColorPickerModule.getTitle()} library`;
+    this.title = `demo application for ${this.aptColorPickerModule.getTitle()} library`;
   } 
 
   onSelectedColorChange(event: ColorChangeEvent): void {
@@ -37,6 +37,11 @@ export class AppComponent implements OnInit{
   onSelectedColorChange3(event: ColorChangeEvent): void {
     this.color3 = event.color;
     this._colorPicker3 = event.target;
+  }
+
+  onButtonClick($event: Event) {
+    // colorPicker.opened ? colorPicker.close() : colorPicker.open();
+    $event.stopPropagation();
   }
 
 }
