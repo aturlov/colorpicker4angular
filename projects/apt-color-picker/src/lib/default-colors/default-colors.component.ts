@@ -7,10 +7,11 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Outpu
 })
 export class DefaultColorsComponent implements OnInit, OnChanges {
 
-  @Input() palette: string[] = [];
-  _rows: string[][] = [];
-  @Output() colorSelect = new EventEmitter<string>();
+  rows: string[][] = [];
 
+  @Input() palette: string[] = [];
+  @Output() colorSelect = new EventEmitter<string>();
+  
   constructor() { }
   
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class DefaultColorsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // TODO why does not work?
-    console.log('Colors ngOnChanges');
+    console.log('Colors on changes');
     if (changes.palette) {
       this.buildRows();
     }
@@ -31,18 +32,18 @@ export class DefaultColorsComponent implements OnInit, OnChanges {
       let row = [];
       for (let g = 0; g < l; g++) {
           if (g === Math.floor(l / 2)) {
-            this._rows.push(row);
+            this.rows.push(row);
             row = [];
           }
           for (let b = 0; b < l; b++) {
               row.push(this.palette[r] + this.palette[g] + this.palette[b]);
           }
       }
-      this._rows.push(row);
+      this.rows.push(row);
     }
   }
 
-  _clickOnColor(color: string): void {
+  clickOnColor(color: string): void {
     this.colorSelect.emit(color);
   }
 }

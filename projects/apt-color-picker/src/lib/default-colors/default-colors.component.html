@@ -1,6 +1,6 @@
 <div class="apt_colorPicker_default">
-    <div *ngFor="let row of _rows" class="apt_colorPicker_default_row">
+    <div *ngFor="let row of rows" class="apt_colorPicker_default_row">
         <div *ngFor="let color of row" title="#{{color}}" class="apt_colorPicker_default_cell" style="background-color: #{{color}};" 
-            (click)="_clickOnColor(color)"></div>
+            (click)="clickOnColor(color)"></div>
     </div>
 </div>

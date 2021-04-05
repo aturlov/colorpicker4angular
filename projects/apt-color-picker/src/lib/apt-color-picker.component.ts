@@ -1,24 +1,39 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AptColorPickerControl, ColorChangeEvent, ColorPickerInput } from './apt-color-picker-common';
 import { DefaultColorsComponent } from './default-colors/default-colors.component';
 
 @Component({
   selector: 'apt-color-picker',
-  templateUrl: './apt-color-picker.component.html' ,
-  styleUrls: ['./apt-color-picker.component.css']
+  template: '' ,
+  styleUrls: ['./apt-color-picker.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class AptColorPickerComponent implements AptColorPickerControl<ColorChangeEvent>, OnInit, OnDestroy {
+export class AptColorPickerComponent implements AptColorPickerControl<ColorChangeEvent>, OnInit, OnChanges, OnDestroy {
 
+  private _palette: string[] = ['00', '99', '33', '66', 'FF', 'CC'];
   private _input: ColorPickerInput | null = null;
   private _popupRef: OverlayRef | null = null;
   private _opened = false;
   private _selectedColor = '';
   private _defaultColorsComponent: DefaultColorsComponent | null = null;
+  private _colorsSubscription: Subscription | null = null;
 
-  @Input() palette: string[] = ['00', '99', '33', '66', 'FF', 'CC'];
+  @Input() get palette(): string[] {
+    return this._palette;
+  }
+  set palette(p: string[]) {
+    if (p) {
+      this._palette = p;
+      if (this._defaultColorsComponent && this._opened) {
+        this.close();
+        this.open();
+      }
+    }
+  }
 
   @Output() readonly selectedColorChange: EventEmitter<ColorChangeEvent> = new EventEmitter<ColorChangeEvent>();
 
@@ -26,20 +41,18 @@ export class AptColorPickerComponent implements AptColorPickerControl<ColorChang
       return this._selectedColor;
   }
 
-  get opened(): boolean {
+  @Input() get opened(): boolean {
     return this._opened;
   }
 
-  @Input() set opened(open: boolean) {
-    this._opened = open;
-    if (this._opened) {
-      this.open();
-    } else {
-      this.close();
-    }
+  constructor(private _overlay: Overlay) { }
+
+  ngOnInit(): void {
   }
 
-  constructor(private _overlay: Overlay) { }
+  ngOnChanges(changes: SimpleChanges): void  {
+    console.log('Changes', changes);
+  }
 
   ngOnDestroy(): void {
     this._destroyPopup();
@@ -69,15 +82,13 @@ export class AptColorPickerComponent implements AptColorPickerControl<ColorChang
           { originX: x1, originY: y1, overlayX: x1, overlayY: y2 },
           { originX: x2, originY: y2, overlayX: x2, overlayY: y1 },
           { originX: x2, originY: y1, overlayX: x2, overlayY: y1 }
-        ]),
-        height: '500px', width: '500px'
+        ])
     });
     this._popupRef = this._overlay.create(overlayconfig);
     const portal = new ComponentPortal(DefaultColorsComponent);
     this._defaultColorsComponent = this._popupRef.attach(portal).instance;
-    console.log(this._defaultColorsComponent);
     this._defaultColorsComponent.palette = this.palette;
-    this._defaultColorsComponent.colorSelect.subscribe(c => this._onColorSelect(c));
+    this._colorsSubscription = this._defaultColorsComponent.colorSelect.subscribe(c => this._onColorSelect(c));
 
     this._opened = true;
   }
@@ -90,9 +101,6 @@ export class AptColorPickerComponent implements AptColorPickerControl<ColorChang
     this._opened = false;
   }
 
-  ngOnInit(): void {
-  }
-
   _onColorSelect(name: string): void {
     this._selectedColor = name;
     this.selectedColorChange.emit({color: name, target: this});
@@ -103,5 +111,8 @@ export class AptColorPickerComponent implements AptColorPickerControl<ColorChang
       this._popupRef.dispose();
       this._popupRef = null;
     }
+    this._colorsSubscription?.unsubscribe();
+    this._colorsSubscription = null;
+    this._defaultColorsComponent = null;
   }
 }

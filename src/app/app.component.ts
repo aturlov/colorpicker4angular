@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AptColorPickerModule, ColorChangeEvent, AptColorPickerControl } from 'apt-color-picker';
 
 @Component({
@@ -9,39 +9,34 @@ import { AptColorPickerModule, ColorChangeEvent, AptColorPickerControl } from 'a
 export class AppComponent implements OnInit{
   title?:string;
 
-  p2 = ['EE', 'BB', '55', '22'];
-  p3 = ['00', '22', '44', '66', '88', 'AA', 'CC','EE'];
+  palettes: {[key: string]: string[]} = {
+    'p1': ['00', '99', '33', '66', 'FF', 'CC'],
+    'p2': ['EE', 'BB', '55', '22'],
+    'p3': ['00', '22', '44', '66', '88', 'AA', 'CC','EE']
+  };
 
-  color1: string = "";
-  color2: string = "";
-  color3: string = "";
+  selectedColor: string = '';
+  selectedPalette = '';
 
-  private _colorPicker3: AptColorPickerControl<ColorChangeEvent> | null = null;
+  @ViewChild('colorPicker1') colorPicker: AptColorPickerControl<ColorChangeEvent> | null = null;
 
   constructor(
     private aptColorPickerModule: AptColorPickerModule
   ){ }
   
   ngOnInit(): void {
-    this.title = `demo application for ${this.aptColorPickerModule.getTitle()} library`;
+    this.title = `Demo application for ${this.aptColorPickerModule.getTitle()} library`;
   } 
 
   onSelectedColorChange(event: ColorChangeEvent): void {
-    this.color1 = event.color;
+    this.selectedColor = event.color;
   }
 
-  onColorButtonClick(event: any): void {
-    event.target.style.color = `#${this._colorPicker3?.selectedColor}`;
-  }
-
-  onSelectedColorChange3(event: ColorChangeEvent): void {
-    this.color3 = event.color;
-    this._colorPicker3 = event.target;
-  }
-
-  onButtonClick($event: Event) {
-    // colorPicker.opened ? colorPicker.close() : colorPicker.open();
-    $event.stopPropagation();
+  changePalette($event: any) {
+    this.selectedPalette = $event.target.value;
+    if (this.colorPicker) {
+      this.colorPicker.palette = this.palettes[this.selectedPalette];
+    }
   }
 
 }
