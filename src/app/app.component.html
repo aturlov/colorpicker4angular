@@ -1,19 +1,36 @@
-<div>
+<h2>Welcome to {{title}}</h2>
+<hr/>
 
-  <div>Welcome to {{title}}</div>
-  <hr/>
-
-  <input [aptColorPicker]="colorPicker1">&nbsp;<span style="color:#{{color1}}">{{color1}}</span>
-  <apt-ColorPicker (selectedColorChange)="onSelectedColorChange($event)" #colorPicker1></apt-ColorPicker>
-  <hr/>
-
-  <apt-ColorPicker [palette]="p2" (selectedColorChange)="color2=$event.color"></apt-ColorPicker>
-  <span style="color:#{{color2}}">{{color2}}</span>
-  <hr/>
-
-  <div >
-    <button (click)="onColorButtonClick($event)">Click to see color</button>
-  </div>
-
-  <apt-ColorPicker [palette]="p3" (selectedColorChange)="onSelectedColorChange3($event)"></apt-ColorPicker>
+<div style="display: inline-block;">
+<h3>Color Picker Palette</h3>
+<input #pDef type="radio" id="default" name="palette" value="p1" [checked]="true" (click)="changePalette($event)"/>
+<label for="default">default</label><br/>
+<input type="radio" id="small" name="palette" value="p2" (click)="changePalette($event)">
+<label for="small">small</label><br/>
+<input type="radio" id="large" name="palette" value="p3" (click)="changePalette($event)">
+<label for="large">large</label>
 </div>
+<div style="display: inline-block;margin-left: 20px;">
+  <h3>Selector Type</h3>
+  <input type="radio" id="default" name="selector" value="s1" [checked]="true">
+  <label for="default">default</label><br>
+  <input type="radio" id="continuous" name="selector" value="s2">
+  <label for="continuous">continuous</label><br>
+  <input type="radio" id="native" name="selector" value="s3">
+  <label for="native">native</label>
+</div>
+<hr/>
+
+<div style="margin-left: 200px;">
+  <div>Color picker is {{colorPicker1.opened ? "open" : "closed"}}</div>
+  <div>Current palette: {{colorPicker1.palette}}</div>
+  <div>Clicked on <span style="color:#{{selectedColor}}">{{selectedColor}}</span></div>
+  <div>Selected color is <span style="background-color:#{{colorPicker1.selectedColor}}">{{colorPicker1.selectedColor}}</span></div>
+  <input [aptColorPicker]="colorPicker1">
+  
+  <button (click)="colorPicker1.opened ? colorPicker1.close() : colorPicker1.open();$event.stopPropagation()"> toggle </button>
+
+  <apt-color-picker (selectedColorChange)="onSelectedColorChange($event)" #colorPicker1></apt-color-picker>
+  <div>Text under the color picker overlay.</div>
+</div>
+<hr/>

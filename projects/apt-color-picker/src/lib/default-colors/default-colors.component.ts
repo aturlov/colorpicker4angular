@@ -1,43 +1,49 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'apt-default-colors',
   templateUrl: './default-colors.component.html',
   styleUrls: ['./default-colors.component.scss']
 })
-export class DefaultColorsComponent implements OnChanges {
+export class DefaultColorsComponent implements OnInit, OnChanges {
+
+  rows: string[][] = [];
 
   @Input() palette: string[] = [];
-  _rows: string[][] = [];
   @Output() colorSelect = new EventEmitter<string>();
-
+  
   constructor() { }
   
+  ngOnInit(): void {
+    this.buildRows();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['palette']) {
+    // TODO why does not work?
+    console.log('Colors on changes');
+    if (changes.palette) {
       this.buildRows();
     }
   }
 
-  private buildRows() {
+  private buildRows(): void {
     const l = this.palette.length;
-    for (var r = 0; r < l; r++) {
-      var row = [];
-      for (var g = 0; g < l; g++) {
-          if (g === Math.floor(l/2)) {
-            this._rows.push(row);
+    for (let r = 0; r < l; r++) {
+      let row = [];
+      for (let g = 0; g < l; g++) {
+          if (g === Math.floor(l / 2)) {
+            this.rows.push(row);
             row = [];
           }
-          for (var b = 0; b < l; b++) {
+          for (let b = 0; b < l; b++) {
               row.push(this.palette[r] + this.palette[g] + this.palette[b]);
           }
       }
-      this._rows.push(row);
-    }    
+      this.rows.push(row);
+    }
   }
 
-  _clickOnColor(color: string):void{
+  clickOnColor(color: string): void {
     this.colorSelect.emit(color);
   }
-
 }
