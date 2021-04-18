@@ -88,7 +88,7 @@ export class AptColorPickerComponent implements AptColorPickerControl<ColorChang
     const portal = new ComponentPortal(DefaultColorsComponent);
     this._defaultColorsComponent = this._popupRef.attach(portal).instance;
     this._defaultColorsComponent.palette = this.palette;
-    this._colorsSubscription = this._defaultColorsComponent.colorSelect.subscribe(c => this._onColorSelect(c));
+    this._colorsSubscription = this._defaultColorsComponent.colorSelect.subscribe((c: string) => this._onColorSelect(c));
 
     this._opened = true;
   }
