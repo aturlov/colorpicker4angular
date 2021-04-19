@@ -7,7 +7,7 @@ import { AptColorPickerModule, ColorChangeEvent, AptColorPickerControl } from 'a
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title?:string;
+  title: string = '';
 
   palettes: {[key: string]: string[]} = {
     'p1': ['00', '99', '33', '66', 'FF', 'CC'],
@@ -22,10 +22,11 @@ export class AppComponent implements OnInit{
 
   constructor(
     private aptColorPickerModule: AptColorPickerModule
-  ){ }
+  ){
+    this.title = `Demo application for ${this.aptColorPickerModule.getTitle()} library`;
+  }
   
   ngOnInit(): void {
-    this.title = `Demo application for ${this.aptColorPickerModule.getTitle()} library`;
   } 
 
   onSelectedColorChange(event: ColorChangeEvent): void {
@@ -38,5 +39,4 @@ export class AppComponent implements OnInit{
       this.colorPicker.palette = this.palettes[this.selectedPalette];
     }
   }
-
 }

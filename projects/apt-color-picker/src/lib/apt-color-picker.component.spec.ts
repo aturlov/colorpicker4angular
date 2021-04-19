@@ -1,3 +1,4 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AptColorPickerComponent } from './apt-color-picker.component';
@@ -8,7 +9,8 @@ describe('AptColorPickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AptColorPickerComponent ]
+      declarations: [ AptColorPickerComponent ],
+      providers: [{ provide: Overlay, useValue: {} }, ]
     })
     .compileComponents();
   });
