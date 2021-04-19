@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { AptColorPickerModule } from 'apt-color-picker';
+
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -7,6 +9,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [AptColorPickerModule]
     }).compileComponents();
   });
 
@@ -16,16 +19,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ColorPicker4Angular'`, () => {
+  it(`should have as title 'Demo application for AptColorPicker library'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ColorPicker4Angular');
+    expect(app.title).toEqual('Demo application for AptColorPicker library');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ColorPicker4Angular app is running!');
+    expect(compiled.querySelector('h2').textContent).toContain('Welcome to Demo application for AptColorPicker library');
   });
 });
