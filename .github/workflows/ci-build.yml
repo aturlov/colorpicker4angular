@@ -1,6 +1,6 @@
 # This is a CI workflow that runs on successful PR Merge into dev branch
 
-name: CI BUILD
+name: ci-build
 
 # Controls when the action will run. 
 on:
@@ -29,12 +29,13 @@ jobs:
           node-version: 14.x
       # Build library and project
       - name: Build
-        run: npm ci
+        run: npm build
 
-      - name: Test library and project
-        run: |
-          npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-          npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js      
+      - name: Test project
+        run: npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+#           npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+#           npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+#           npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js      
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
