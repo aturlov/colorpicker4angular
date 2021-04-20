@@ -5,7 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-lib": "ng build AptColorPicker",
+    "build-ci": "ng build --prod",
+    "build-lib-ci": "ng build AptColorPicker --prod",
     "test": "ng test",
+    "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test-lib": "ng test AptColorPicker",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
