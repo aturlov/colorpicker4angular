@@ -22,14 +22,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
         uses: actions/checkout@v2
+
       # Install NodeJS
       - name: setup node 14.x
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
 
-      - name: Install packages
-        run: npm install
+      - name: Clean Install packages
+        run: npm ci
+
       # Build library and project
       - name: Build AptColorPicker
         run: npm run build-lib-ci
