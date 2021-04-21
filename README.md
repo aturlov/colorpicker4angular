@@ -7,3 +7,5 @@ ColorPicker is a simple color-picking popup control for Angular framework that i
 This project is in active development. The current demo looks like this:
 
 ![image](https://user-images.githubusercontent.com/411697/114316104-13250380-9ad0-11eb-80fd-950b13dce143.png)
+
+See live demo here https://aturlov.github.io/colorpicker4angular/
