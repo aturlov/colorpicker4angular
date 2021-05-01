@@ -1,103 +1,185 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser'
 import { ColorPickerToggleComponent } from './color-picker-toggle.component';
-import { AptColorPickerControl } from '../apt-color-picker-common';
-import { DebugElement } from '@angular/core';
+import { AptColorPickerControl, ColorChangeEvent } from '../apt-color-picker-common';
 
 
-describe('ToggleComponent', () => {
+describe('ToggleComponent positive 1', () => {
   
   let component: ColorPickerToggleComponent;
   let fixture: ComponentFixture<ColorPickerToggleComponent>;
-  let toggleDe: DebugElement;
-  let toggleEl;
-  // let mockAptColorPickerControl = {
-  //   palette: ['00', '99', '33', '66', 'FF', 'CC'],
-  //   selectedColorChange: EventEmitter<E>,
-  //   readonly selectedColor: "",
-  //   opened: false,
-  //   open(): void {},
-  //   close(): void {},
-  //   setInput(input: ColorPickerInput): void};
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ColorPickerToggleComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
+    }).compileComponents();
     fixture = TestBed.createComponent(ColorPickerToggleComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    toggleDe = fixture.debugElement.query(By.css('.apt-color-picker-toggle'));
-    toggleEl = toggleDe.nativeElement;
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('_toggle should call event.stopPropagation every time',()=>{
+    component.colorPicker = colorPickerSpy;
+    component._toggle(toggleEventSpy);
+    expect(toggleEventSpy.stopPropagation).toHaveBeenCalledTimes(1);      
   });
 
-  it('should have colorPicker property as null at begin',()=>{
-    expect(component.colorPicker).toBeNull();
-    // pending();
-  });
+});
 
-  it('colorPicker should be AptColorPickerControl',()=>{
-    expect(5).toEqual(5);
-    pending();
+
+describe('ToggleComponent positive 2', () => {
+  
+  let component: ColorPickerToggleComponent;
+  let fixture: ComponentFixture<ColorPickerToggleComponent>;
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ColorPickerToggleComponent ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ColorPickerToggleComponent);
+    component = fixture.componentInstance;
   });
 
   it('_toggle method should call this.colorPicker.open() if colorPicker.opened==false',()=>{
+    component.colorPicker = colorPickerSpy;
+    component.colorPicker.opened = false;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.open).toHaveBeenCalledTimes(1);
+  });
 
-    pending();
+});
+
+
+describe('ToggleComponent positive 3', () => {
+  
+  let component: ColorPickerToggleComponent;
+  let fixture: ComponentFixture<ColorPickerToggleComponent>;
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ColorPickerToggleComponent ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ColorPickerToggleComponent);
+    component = fixture.componentInstance;
   });
 
   it('_toggle method should call this.colorPicker.close() if colorPicker.opened==true',()=>{
-
-    pending();
+    component.colorPicker = colorPickerSpy;
+    component.colorPicker.opened = true;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.close).toHaveBeenCalledTimes(1);
   });
 
-  it('_toggle method should call event.stopPropagation()',()=>{
+});
 
-    pending();
+
+describe('ToggleComponent positive 4', () => {
+  
+  let component: ColorPickerToggleComponent;
+  let fixture: ComponentFixture<ColorPickerToggleComponent>;
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ColorPickerToggleComponent ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ColorPickerToggleComponent);
+    component = fixture.componentInstance;
   });
 
-  it('should have selector',()=>{
-    toggleDe.nativeElement.selector;
-    pending();
+  it('_toggle method should call this.colorPicker: once open or once close and once stopPropagation',()=>{
+    component.colorPicker = colorPickerSpy;
+    component.colorPicker.opened = false;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.open).toHaveBeenCalledTimes(1);
+    expect(component.colorPicker.close).toHaveBeenCalledTimes(0);
+    expect(toggleEventSpy.stopPropagation).toHaveBeenCalledTimes(1);   
+
+    component.colorPicker.opened = true;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.open).toHaveBeenCalledTimes(1);
+    expect(component.colorPicker.close).toHaveBeenCalledTimes(1);
+    expect(toggleEventSpy.stopPropagation).toHaveBeenCalledTimes(2); 
+
+    component.colorPicker.opened = false;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.open).toHaveBeenCalledTimes(2);
+    expect(component.colorPicker.close).toHaveBeenCalledTimes(1);
+    expect(toggleEventSpy.stopPropagation).toHaveBeenCalledTimes(3); 
+  });
+});
+
+
+describe('ToggleComponent negative 1', () => {
+  
+  let component: ColorPickerToggleComponent;
+  let fixture: ComponentFixture<ColorPickerToggleComponent>;
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ColorPickerToggleComponent ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ColorPickerToggleComponent);
+    component = fixture.componentInstance;
   });
 
-  it('should have template',()=>{
+  it('_toggle should not call stopPropagation without colorPicker',()=>{
+    component.colorPicker = null;
+    component._toggle(toggleEventSpy);
+    expect(toggleEventSpy.stopPropagation).not.toHaveBeenCalled();
+  });
+});
 
-    pending();
+
+describe('ToggleComponent negative 2', () => {
+  
+  let component: ColorPickerToggleComponent;
+  let fixture: ComponentFixture<ColorPickerToggleComponent>;
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ColorPickerToggleComponent ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ColorPickerToggleComponent);
+    component = fixture.componentInstance;
+  });
+  it('_toggle method should not call this.colorPicker.open() if colorPicker.opened==true',()=>{
+    component.colorPicker = colorPickerSpy;
+    component.colorPicker.opened = true;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.open).not.toHaveBeenCalled();
+  });
+});
+
+
+describe('ToggleComponent negative 3', () => {
+  
+  let component: ColorPickerToggleComponent;
+  let fixture: ComponentFixture<ColorPickerToggleComponent>;
+  let colorPickerSpy = jasmine.createSpyObj<AptColorPickerControl<ColorChangeEvent>>(['open','close']);
+  let toggleEventSpy = jasmine.createSpyObj<Event>(['stopPropagation']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ColorPickerToggleComponent ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ColorPickerToggleComponent);
+    component = fixture.componentInstance;
   });
 
-  it('template should have a button',()=>{
-
-    pending();
+  it('_toggle method should not call this.colorPicker.close() if colorPicker.opened==false',()=>{
+    component.colorPicker = colorPickerSpy;
+    component.colorPicker.opened = false;
+    component._toggle(toggleEventSpy);
+    expect(component.colorPicker.close).not.toHaveBeenCalled();
   });
-
-  it('template should have any title',()=>{
-
-    pending();
-  });
-
-  it('should have host class apt-color-picker-toggle',()=>{
-
-    pending();
-  });
-
-  it('should have host (click) method',()=>{
-
-    pending();
-  });
-
-  it('host (click) method should call _toggle method',()=>{
-
-    pending();
-  });
-
 });
