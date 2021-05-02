@@ -14,6 +14,9 @@ import {AptColorPickerControl, ColorChangeEvent} from '../apt-color-picker-commo
 export class ColorPickerToggleComponent implements OnInit {
 
   @Input('for') colorPicker: AptColorPickerControl<ColorChangeEvent> | null = null;
+  @Input() iconSize: string = '14px';
+  @Input() iconColor: string = '#000000';
+  @Input() buttonStyle: string = '';
 
   constructor() { }
 
