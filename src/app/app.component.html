@@ -11,32 +11,24 @@
   <label for="large">large</label>
 </div>
 <div style="display: inline-block;margin-left: 20px;">
-  <h3>Selector Type</h3>
-  <input type="radio" id="default" name="selector" value="s1" [checked]="true">
-  <label for="default">default</label><br>
-  <input type="radio" id="continuous" name="selector" value="s2">
-  <label for="continuous">continuous</label><br>
-  <input type="radio" id="native" name="selector" value="s3">
-  <label for="native">native</label>
+  <h3>Toggle Icon Size</h3>
+  <input type="radio" id="iconSize14" name="selector" value="14px" [checked]="true" (click) = "colorPickerToggle1.iconSize='14px'">
+  <label for="default">14px</label><br>
+  <input type="radio" id="iconSize18" name="selector" value="18px" (click) = "colorPickerToggle1.iconSize='18px'">
+  <label for="continuous">18px</label><br>
+  <input type="radio" id="iconSize24" name="selector" value="24px" (click) = "colorPickerToggle1.iconSize='24px'">
+  <label for="native">24px</label>
 </div>
 <hr/>
 
 <div style="margin-left: 200px;">
   <div>Color picker is {{colorPicker1.opened ? "open" : "closed"}}</div>
   <div>Current palette: {{colorPicker1.palette}}</div>
+  <div>Current toggle icon size: {{colorPickerToggle1.iconSize}}</div>
   <div>Clicked on <span style="color:#{{selectedColor}}">{{selectedColor}}</span></div>
   <div>Selected color is <span style="background-color:#{{colorPicker1.selectedColor}}">{{colorPicker1.selectedColor}}</span></div>
   <input [aptColorPicker]="colorPicker1">
-  
-  <button (click)="colorPicker1.opened ? colorPicker1.close() : colorPicker1.open();$event.stopPropagation()"> toggle </button>
-
-  <apt-color-picker (selectedColorChange)="onSelectedColorChange($event)" #colorPicker1></apt-color-picker>
+  <apt-color-picker-toggle #colorPickerToggle1 [for]="colorPicker1" iconColor="#{{colorPicker1.selectedColor}}"></apt-color-picker-toggle>
+  <apt-color-picker #colorPicker1 (selectedColorChange)="onSelectedColorChange($event)"></apt-color-picker>
   <div>Text under the color picker overlay.</div>
-</div>
-<hr/>
-
-<div>
-  <input [aptColorPicker]="colorPicker2">
-  <apt-color-picker-toggle [for]="colorPicker2" iconSize="2em" iconColor="#b4233a" buttonStyle="cursor: pointer;"></apt-color-picker-toggle>
-  <apt-color-picker (selectedColorChange)="onSelectedColorChange($event)" #colorPicker2></apt-color-picker>
 </div>
